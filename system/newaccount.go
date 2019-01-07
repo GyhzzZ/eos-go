@@ -1,8 +1,8 @@
 package system
 
 import (
-	"github.com/cochainio/eos-go"
-	"github.com/cochainio/eos-go/ecc"
+	"github.com/GyhzzZ/eos-go"
+	"github.com/GyhzzZ/eos-go/ecc"
 )
 
 // NewNewAccount returns a `newaccount` action that lives on the
