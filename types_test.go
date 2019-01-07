@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cochainio/eos-go/ecc"
+	"github.com/GyhzzZ/eos-go/ecc"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

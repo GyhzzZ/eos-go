@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cochainio/eos-go"
+	"github.com/GyhzzZ/eos-go"
 )
 
 type Client struct {

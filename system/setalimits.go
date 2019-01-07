@@ -1,7 +1,7 @@
 package system
 
 import (
-	eos "github.com/cochainio/eos-go"
+	eos "github.com/GyhzzZ/eos-go"
 )
 
 // NewSetalimits sets the account limits. Requires signature from `eosio@active` account.

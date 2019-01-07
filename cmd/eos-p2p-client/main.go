@@ -6,7 +6,7 @@ import (
 
 	"encoding/hex"
 
-	"github.com/cochainio/eos-go/p2p"
+	"github.com/GyhzzZ/eos-go/p2p"
 )
 
 var p2pAddr = flag.String("p2p-addr", "peering.mainnet.eoscanada.com:9876", "P2P socket connection")

@@ -4,7 +4,7 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	eos "github.com/cochainio/eos-go"
+	eos "github.com/GyhzzZ/eos-go"
 )
 
 func DecodeHex(hexString string) (data []byte) {

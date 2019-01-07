@@ -1,7 +1,7 @@
 package system
 
 import (
-	"github.com/cochainio/eos-go"
+	"github.com/GyhzzZ/eos-go"
 	"strconv"
 )
 
