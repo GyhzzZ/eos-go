@@ -19,6 +19,24 @@ type PublicKey struct {
 	Content []byte
 }
 
+func (p PublicKey) Valid() bool {
+	switch p.Curve {
+	case CurveK1:
+		_, err := btcec.ParsePubKey(p.Content[:], btcec.S256())
+		if err != nil {
+			return false
+		}
+	case CurveR1:
+		_, err := btcec.ParsePubKey(p.Content[:], btcec.S256R1())
+		if err != nil {
+			return false
+		}
+	default:
+		return false
+	}
+	return true
+}
+
 func NewPublicKey(pubKey string) (out PublicKey, err error) {
 	if len(pubKey) < 8 {
 		return out, fmt.Errorf("invalid format")
