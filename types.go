@@ -180,7 +180,7 @@ type Symbol struct {
 
 // EOSSymbol represents the standard EOS symbol on the chain.  It's
 // here just to speed up things.
-var EOSSymbol = Symbol{Precision: 4, Symbol: "EOS"}
+var EOSSymbol = Symbol{Precision: 4, Symbol: "SYS"}
 
 func NewEOSAssetFromString(amount string) (out Asset, err error) {
 	if len(amount) == 0 {
