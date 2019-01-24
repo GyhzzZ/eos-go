@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"encoding/json"
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"math"
@@ -586,4 +587,20 @@ func (i *JSONUint64) UnmarshalJSON(data []byte) error {
 	*i = JSONUint64(v)
 
 	return nil
+}
+
+// Blob
+
+// Blob is base64 encoded data
+// https://github.com/EOSIO/fc/blob/0e74738e938c2fe0f36c5238dbc549665ddaef82/include/fc/variant.hpp#L47
+type Blob string
+
+// Data returns decoded base64 data
+func (b Blob) Data() ([]byte, error) {
+	return base64.StdEncoding.DecodeString(string(b))
+}
+
+// String returns the blob as a string
+func (b Blob) String() string {
+	return string(b)
 }

@@ -496,6 +496,7 @@ func (api *API) GetRequiredKeys(tx *Transaction) (out *GetRequiredKeysResp, err 
 
 func (api *API) GetCurrencyBalance(account AccountName, symbol string, code AccountName) (out []Asset, err error) {
 	params := M{"account": account, "code": code}
+
 	if symbol != "" {
 		params["symbol"] = symbol
 	}
