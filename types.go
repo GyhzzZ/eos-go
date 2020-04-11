@@ -1,6 +1,7 @@
 package eos
 
 import (
+	"encoding/base64"
 	"encoding/binary"
 	"encoding/hex"
 	"encoding/json"
@@ -180,7 +181,7 @@ type Symbol struct {
 
 // EOSSymbol represents the standard EOS symbol on the chain.  It's
 // here just to speed up things.
-var EOSSymbol = Symbol{Precision: 4, Symbol: "SYS"}
+var EOSSymbol = Symbol{Precision: 4, Symbol: "TON"}
 
 func NewEOSAssetFromString(amount string) (out Asset, err error) {
 	if len(amount) == 0 {
@@ -586,4 +587,20 @@ func (i *JSONUint64) UnmarshalJSON(data []byte) error {
 	*i = JSONUint64(v)
 
 	return nil
+}
+
+// Blob
+
+// Blob is base64 encoded data
+// https://github.com/EOSIO/fc/blob/0e74738e938c2fe0f36c5238dbc549665ddaef82/include/fc/variant.hpp#L47
+type Blob string
+
+// Data returns decoded base64 data
+func (b Blob) Data() ([]byte, error) {
+	return base64.StdEncoding.DecodeString(string(b))
+}
+
+// String returns the blob as a string
+func (b Blob) String() string {
+	return string(b)
 }

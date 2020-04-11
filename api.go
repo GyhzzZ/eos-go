@@ -438,6 +438,35 @@ func (api *API) GetProducers(lower string, limit uint32, json bool) (out *Produc
 	return
 }
 
+type TONProducersResp struct {
+	Producers               []TONProducer `json:"rows"`
+	TotalProducerVoteWeight JSONFloat64   `json:"total_producer_vote_weight"`
+	More                    string        `json:"more"`
+}
+
+type TONProducer struct {
+	Owner         string  `json:"owner"`
+	TotalVotes    float64 `json:"total_votes,string"`
+	ProducerKey   string  `json:"producer_key"`
+	IsActive      int     `json:"is_active"`
+	URL           string  `json:"url"`
+	UnpaidBlocks  int     `json:"unpaid_blocks"`
+	LastClaimTime string  `json:"last_claim_time"`
+	Location      int     `json:"location"`
+}
+
+func (api *API) TONGetProducers(lower string, limit uint32, json bool) (out *TONProducersResp, err error) {
+	/*
+		+FC_REFLECT( eosio::chain_apis::read_only::get_producers_params, (json)(lower_bound)(limit) )
+		+FC_REFLECT( eosio::chain_apis::read_only::get_producers_result, (rows)(total_producer_vote_weight)(more) ); */
+	err = api.call("chain", "get_producers", M{
+		"lower_bound": lower,
+		"limit":       limit,
+		"json":        json,
+	}, &out)
+	return
+}
+
 func (api *API) GetBlockByNum(num uint32) (out *BlockResp, err error) {
 	err = api.call("chain", "get_block", M{"block_num_or_id": fmt.Sprintf("%d", num)}, &out)
 	//err = api.call("chain", "get_block", M{"block_num_or_id": num}, &out)
@@ -496,6 +525,7 @@ func (api *API) GetRequiredKeys(tx *Transaction) (out *GetRequiredKeysResp, err 
 
 func (api *API) GetCurrencyBalance(account AccountName, symbol string, code AccountName) (out []Asset, err error) {
 	params := M{"account": account, "code": code}
+
 	if symbol != "" {
 		params["symbol"] = symbol
 	}
@@ -563,6 +593,7 @@ func (api *API) call(baseAPI string, endpoint string, body interface{}, out inte
 		fmt.Println("")
 	}
 
+	fmt.Println("string(cnt.Bytes())::::", string(cnt.Bytes()))
 	if err := json.Unmarshal(cnt.Bytes(), &out); err != nil {
 		return fmt.Errorf("Unmarshal: %s", err)
 	}
