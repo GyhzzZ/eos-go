@@ -593,7 +593,7 @@ func (api *API) call(baseAPI string, endpoint string, body interface{}, out inte
 		fmt.Println("")
 	}
 
-	fmt.Println("string(cnt.Bytes())::::", string(cnt.Bytes()))
+	//fmt.Println("string(cnt.Bytes())::::", string(cnt.Bytes()))
 	if err := json.Unmarshal(cnt.Bytes(), &out); err != nil {
 		return fmt.Errorf("Unmarshal: %s", err)
 	}
